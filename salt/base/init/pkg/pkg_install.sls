@@ -5,6 +5,5 @@ pkg_install:
       - gcc-c++
       - lrzsz
       - wget
-      - net-tools
       - telnet
       - vim-enhanced
