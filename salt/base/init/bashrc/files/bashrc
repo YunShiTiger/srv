@@ -12,30 +12,25 @@
 if [ "$PS1" ]; then
   if [ -z "$PROMPT_COMMAND" ]; then
     case $TERM in
-    xterm*|vte*)
-      if [ -e /etc/sysconfig/bash-prompt-xterm ]; then
-          PROMPT_COMMAND=/etc/sysconfig/bash-prompt-xterm
-      elif [ "${VTE_VERSION:-0}" -ge 3405 ]; then
-          PROMPT_COMMAND="__vte_prompt_command"
-      else
-          PROMPT_COMMAND='printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
-      fi
-      ;;
-    screen*)
-      if [ -e /etc/sysconfig/bash-prompt-screen ]; then
-          PROMPT_COMMAND=/etc/sysconfig/bash-prompt-screen
-      else
-          PROMPT_COMMAND='printf "\033k%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
-      fi
-      ;;
+    xterm*)
+        if [ -e /etc/sysconfig/bash-prompt-xterm ]; then
+            PROMPT_COMMAND=/etc/sysconfig/bash-prompt-xterm
+        else
+            PROMPT_COMMAND='printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
+        fi
+        ;;
+    screen)
+        if [ -e /etc/sysconfig/bash-prompt-screen ]; then
+            PROMPT_COMMAND=/etc/sysconfig/bash-prompt-screen
+        else
+            PROMPT_COMMAND='printf "\033]0;%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
+        fi
+        ;;
     *)
-      [ -e /etc/sysconfig/bash-prompt-default ] && PROMPT_COMMAND=/etc/sysconfig/bash-prompt-default
-      ;;
-    esac
+        [ -e /etc/sysconfig/bash-prompt-default ] && PROMPT_COMMAND=/etc/sysconfig/bash-prompt-default
+        ;;
+      esac
   fi
-  # Turn on parallel history
-  shopt -s histappend
-  history -a
   # Turn on checkwinsize
   shopt -s checkwinsize
   [ "$PS1" = "\\s-\\v\\\$ " ] && PS1="[\u@\h \W]\\$ "
@@ -73,7 +68,6 @@ if ! shopt -q login_shell ; then # We're not a login shell
        umask 022
     fi
 
-    SHELL=/bin/bash
     # Only display echos from profile.d scripts if we are no login shell
     # and interactive - otherwise just process them to set envvars
     for i in /etc/profile.d/*.sh; do
@@ -81,13 +75,13 @@ if ! shopt -q login_shell ; then # We're not a login shell
             if [ "$PS1" ]; then
                 . "$i"
             else
-                . "$i" >/dev/null
+                . "$i" >/dev/null 2>&1
             fi
         fi
     done
 
     unset i
-    unset -f pathmunge
+    unset pathmunge
 fi
 # vim:ts=4:sw=4
 export PROMPT_COMMAND='{ msg=$(history 1 | { read x y; echo $y; }) ;logger [`pwd`]": $msg";}'
