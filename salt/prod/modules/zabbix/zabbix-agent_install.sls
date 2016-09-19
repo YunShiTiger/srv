@@ -66,3 +66,9 @@ zabbix_init_scp:
       zabbix_path: {{ zabbix_path }}
       zabbix_name: {{ zabbix_name }}
     - unless: test -f /etc/init.d/zabbix
+
+zabbix_service_start:
+  service.running:
+    - name: zabbix-agentd
+    - enable: True
+    - reload: True
