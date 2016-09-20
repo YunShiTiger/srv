@@ -3,6 +3,8 @@
 {% set zabbix_path = '/usr/local' %}
 {% set zabbix_name = 'zabbix-agent' %}
 {% set zabbix_server_ip  = '192.168.56.132' %}
+{% set zabbix_user  = 'zabbix' %}
+{% set zabbix_user_id  = '601' %}
 
 zabbix-user_add:
   user.present:
