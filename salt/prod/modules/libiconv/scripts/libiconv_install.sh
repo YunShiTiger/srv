@@ -21,6 +21,9 @@ rm -rf ${LIBICONV_PATH}/${LIBICONV_PKG_NAME}
 rm -rf ${LIBICONV_PATH}/${LIBICONV_NAME}
 
 tar xf ${LIBICONV_PKG_NAME}.tar.gz
-mv ${LIBICONV_PKG_NAME} ${LIBICONV_PATH}/${LIBICONV_PKG_NAME}
+cd ${LIBICONV_PKG_NAME}
+./configure \
+--prefix=${LIBICONV_PATH}/${LIBICONV_PKG_NAME} 1>>/dev/null
+make 1>>/dev/null && make install 1>>/dev/null && rm -rf ${LIBICONV_PKG_PATH}/${LIBICONV_PKG_NAME}
 
 [ -d ${LIBICONV_PATH}/${LIBICONV_PKG_NAME} ] && ln -s ${LIBICONV_PATH}/${LIBICONV_PKG_NAME} ${LIBICONV_PATH}/${LIBICONV_NAME}

@@ -25,5 +25,6 @@ cd ${REDIS_PKG_NAME}
 make PREFIX=${REDIS_PATH}/${REDIS_PKG_NAME} MALLOC=jemalloc install 1>>/dev/null && \
 cp src/redis-trib.rb ${REDIS_PATH}/${REDIS_PKG_NAME}/bin
 mkdir -p ${REDIS_PATH}/${REDIS_PKG_NAME}/{etc,data,log}
+rm -rf ${REDIS_PKG_PATH}/${REDIS_PKG_NAME}
 
 [ -d ${REDIS_PATH}/${REDIS_PKG_NAME} ] && ln -s ${REDIS_PATH}/${REDIS_PKG_NAME} ${REDIS_PATH}/${REDIS_NAME}

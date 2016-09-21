@@ -1,0 +1,31 @@
+#!/bin/sh
+
+source /etc/profile
+
+MEMCACHED_PKG_PATH="/usr/local/src"
+MEMCACHED_PKG_NAME="memcached-1.4.29"
+MEMCACHED_PATH="/usr/local"
+MEMCACHED_NAME="memcached"
+
+# 安装依赖软件包
+arrayPackages=(gcc)
+for package in ${arrayPackages[*]}
+  do
+        [ `rpm -qa ${package} |wc -l` -eq 0 ] && yum install -y ${package} 1>> /dev/null
+done
+
+# 解压软件包
+cd ${MEMCACHED_PKG_PATH}
+rm -rf ${MEMCACHED_PKG_NAME}
+rm -rf ${MEMCACHED_PATH}/${MEMCACHED_PKG_NAME}
+rm -rf ${MEMCACHED_PATH}/${MEMCACHED_NAME}
+
+tar xf ${MEMCACHED_PKG_NAME}.tar.gz
+cd ${MEMCACHED_PKG_NAME}
+./configure \
+--prefix=${MEMCACHED_PATH}/${MEMCACHED_PKG_NAME} \
+--enable-64bit \
+--with-libevent=${MEMCACHED_PATH}/libevent 1>>/dev/null
+make 1>>/dev/null && make install 1>>/dev/null && rm -rf ${MEMCACHED_PKG_PATH}/${MEMCACHED_PKG_NAME}
+
+[ -d ${MEMCACHED_PATH}/${MEMCACHED_PKG_NAME} ] && ln -s ${MEMCACHED_PATH}/${MEMCACHED_PKG_NAME} ${MEMCACHED_PATH}/${MEMCACHED_NAME}
