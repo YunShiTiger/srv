@@ -29,3 +29,5 @@ tar xf ${MYSQL_PKG_NAME}.tar.gz
 mv ${MYSQL_PKG_NAME} ${MYSQL_PATH}/${MYSQL_NAME}
 
 [ -d ${MYSQL_PATH}/${MYSQL_NAME} ] && ln -s ${MYSQL_PATH}/${MYSQL_NAME} ${MYSQL_PATH}/mysql
+echo "${MYSQL_PATH}/${MYSQL_NAME}/lib" >> /etc/ld.so.conf.d/mysql-x86_64.conf    
+ldconfig
