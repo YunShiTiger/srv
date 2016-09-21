@@ -13,7 +13,7 @@ redis_pkg_scp:
 
 redis_pkg_install:
   cmd.script:
-    - source: salt://modules/redis/scripts/redis-agent_install.sh
+    - source: salt://modules/redis/scripts/redis_install.sh
     - template: jinja
     - defaults:
       redis_pkg_path: {{ redis_pkg_path }}
