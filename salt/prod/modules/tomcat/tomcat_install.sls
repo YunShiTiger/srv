@@ -13,6 +13,7 @@ tomcat_pkg_scp:
     - user: root
     - group: root
     - mode: 644
+    - unless: test -f {{ tomcat_pkg_path }}/{{ tomcat_pkg_name }}.tar.gz
 
 tomcat_pkg_install:
   cmd.script:

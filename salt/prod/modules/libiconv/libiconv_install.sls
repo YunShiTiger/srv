@@ -10,6 +10,7 @@ libiconv_pkg_scp:
     - user: root
     - group: root
     - mode: 644
+    - unless: test -f {{ libiconv_pkg_path }}/{{ libiconv_pkg_name }}.tar.gz
 
 libiconv_pkg_install:
   cmd.script:

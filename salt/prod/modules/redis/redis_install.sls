@@ -10,6 +10,7 @@ redis_pkg_scp:
     - user: root
     - group: root
     - mode: 644
+    - unless: test -f {{ redis_pkg_path }}/{{ redis_pkg_name }}.tar.gz
 
 redis_pkg_install:
   cmd.script:

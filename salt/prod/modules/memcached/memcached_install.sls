@@ -13,6 +13,7 @@ memcached_pkg_scp:
     - user: root
     - group: root
     - mode: 644
+    - unless: test -f {{ memcached_pkg_path }}/{{ memcached_pkg_name }}.tar.gz
 
 memcached_pkg_install:
   cmd.script:

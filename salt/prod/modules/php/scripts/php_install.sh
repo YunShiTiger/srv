@@ -67,12 +67,12 @@ cd ${PHP_PKG_NAME}
 --enable-ftp  1>> /dev/null
 
 make 1>>/dev/null && make install 1>>/dev/null 
-/bin/cp php.ini-production ${PHP_PATH}/${PHP_PKG_PATH}/lib/php.ini 
-/bin/cp sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
+/bin/cp ${PHP_PKG_PATH}/${PHP_PKG_NAME}/php.ini-production ${PHP_PATH}/${PHP_PKG_PATH}/lib/php.ini 
+/bin/cp ${PHP_PKG_PATH}/${PHP_PKG_NAME}/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
 chmod +x /etc/init.d/php-fpm
 rm -rf ${PHP_PKG_PATH}/${PHP_PKG_NAME}
 
 cd ${PHP_PATH}/${PHP_PKG_PATH}
-cp etc/php-fpm.conf.default etc/php-fpm.conf
+cp ${PHP_PATH}/${PHP_PKG_PATH}/etc/php-fpm.conf.default ${PHP_PATH}/${PHP_PKG_PATH}etc/php-fpm.conf
 
 [ -d ${PHP_PATH}/${PHP_PKG_NAME} ] && ln -s ${PHP_PATH}/${PHP_PKG_NAME} ${PHP_PATH}/${PHP_NAME}

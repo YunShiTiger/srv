@@ -8,9 +8,9 @@
 
 zabbix-user_add:
   user.present:
-    - name: zabbix
-    - uid: 601
-    - gid: 601
+    - name: {{ zabbix_user }}
+    - uid: {{ zabbix_user_id }}
+    - gid: {{ zabbix_user_id }}
     - shell: /sbin/nologin
     - createhome: False
     - require:
@@ -18,8 +18,8 @@ zabbix-user_add:
 
 zabbix-group_add:
   group.present:
-    - name: zabbix
-    - gid: 601
+    - name: {{ zabbix_user }}
+    - gid: {{ zabbix_user_id }}
 
 zabbix_pkg_scp:
   file.managed:
@@ -28,6 +28,7 @@ zabbix_pkg_scp:
     - user: root
     - group: root
     - mode: 644
+    - unless: test -f {{ zabbix_pkg_path }}/{{ zabbix_pkg_name }}.tar.gz
 
 zabbix_pkg_install:
   cmd.script:

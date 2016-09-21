@@ -10,6 +10,7 @@ java_pkg_scp:
     - user: root
     - group: root
     - mode: 644
+    - unless: test -f {{ java_pkg_path }}/{{ java_pkg_name }}.tar.gz
 
 java_pkg_install:
   cmd.script:
