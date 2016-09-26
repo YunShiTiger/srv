@@ -102,6 +102,12 @@ JAVA_OPTS="-Djava.awt.headless=true -Dfile.encoding=UTF-8
            -Xloggc:$CATALINA_BASE/logs/gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps
            -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=$CATALINA_BASE/logs"
 
+CATALINA_OPTS="-Dcom.sun.management.jmxremote 
+               -Djava.rmi.server.hostname=192.168.56.132
+               -Dcom.sun.management.jmxremote.ssl=false 
+               -Dcom.sun.management.jmxremote.port=12345
+               -Dcom.sun.management.jmxremote.authenticate=false"
+
 # OS specific support.  $var _must_ be set to either true or false.
 cygwin=false
 darwin=false

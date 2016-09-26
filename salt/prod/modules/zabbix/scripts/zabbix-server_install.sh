@@ -31,6 +31,8 @@ cd ${ZABBIX_PKG_NAME}
 --with-net-snmp \
 --with-libcurl \
 --enable-java \
+--with-ssh2 \
+--enable-ipv6 \
 --with-libxml2 1>>/dev/null
 
 make 1>>/dev/null && make install 1>>/dev/null && rm -rf ${ZABBIX_PKG_PATH}/${ZABBIX_PKG_NAME}

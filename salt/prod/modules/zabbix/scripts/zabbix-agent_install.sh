@@ -32,5 +32,6 @@ cd ${ZABBIX_PKG_NAME}
 --enable-agent 1>>/dev/null
 
 make 1>>/dev/null && make install 1>>/dev/null && rm -rf ${ZABBIX_PKG_PATH}/${ZABBIX_PKG_NAME}
+mkdir ${ZABBIX_PATH}/${ZABBIX_PKG_NAME}/scripts
 
 [ -d ${ZABBIX_PATH}/${ZABBIX_PKG_NAME} ] && ln -s ${ZABBIX_PATH}/${ZABBIX_PKG_NAME} ${ZABBIX_PATH}/${ZABBIX_NAME}
