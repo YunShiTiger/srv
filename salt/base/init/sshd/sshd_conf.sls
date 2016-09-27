@@ -12,3 +12,12 @@ service_sshd_restart:
     - name: sshd
     - enable: True
     - reload: True
+
+motd_conf_scp:
+  file.managed:
+    - name: /etc/motd
+    - source: salt://init/sshd/files/motd
+    - user: root
+    - group: root
+    - mode: 644
+    - backup: minion
